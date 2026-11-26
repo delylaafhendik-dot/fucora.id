@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FUCORA — DetoksLayar & Fokus Belajar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Latar Belakang Bintang Kosmik -->
+  <canvas id="starfield"></canvas>
+
+  <!-- ================= HALAMAN LOGIN ================= -->
+  <section id="login-screen" class="screen active">
+    <div class="login-card glass-panel">
+      <div class="logo-container">
+        <img src="logo.png" alt="Logo FUCORA" class="brand-logo" onerror="this.style.display='none'; document.getElementById('fallback-logo').style.display='flex';" />
+        <div id="fallback-logo" class="fallback-logo" style="display: none;">
+          <svg width="46" height="46" viewBox="0 0 64 64" fill="none">
+            <defs>
+              <linearGradient id="fucoraGrad" x1="0" y1="0" x2="64" y2="64">
+                <stop offset="0%" stop-color="#00D2FF"/>
+                <stop offset="100%" stop-color="#7B2CBF"/>
+              </linearGradient>
+            </defs>
+            <circle cx="32" cy="32" r="26" stroke="url(#fucoraGrad)" stroke-width="4" stroke-dasharray="110 25"/>
+            <path d="M24 44V20H42V26H30V30H39V36H30V44H24Z" fill="url(#fucoraGrad)"/>
+            <path d="M48 12L50 17L55 19L50 21L48 26L46 21L41 19L46 17L48 12Z" fill="#38BDF8"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">FUCORA</h1>
+          <p class="brand-tagline">Focus Your Future • DetoksLayar</p>
+        </div>
+      </div>
+
+      <p class="login-desc">
+        Masuk sebagai Kadet Pelajar untuk mengukur dampak <em>doomscrolling</em> dan menyusun orbit jadwal belajarmu.
+      </p>
+
+      <form id="login-form">
+        <div class="input-group">
+          <label for="student-name">Nama Lengkap Siswa</label>
+          <input type="text" id="student-name" placeholder="Contoh: Delyla Afhendik" required />
+        </div>
+
+        <div class="input-group">
+          <label for="student-class">Kelas / Jurusan</label>
+          <input type="text" id="student-class" placeholder="Contoh: XI IPA 2" required />
+        </div>
+
+        <div class="input-group">
+          <label for="student-email">Alamat Gmail Siswa</label>
+          <input type="email" id="student-email" value="delylaafhendik@gmail.com" required />
+        </div>
+
+        <button type="submit" class="btn-primary">
+          <span>🚀 Masuk ke Kokpit Fokus</span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= DASHBOARD UTAMA ================= -->
+  <section id="dashboard-screen" class="screen">
+    <!-- Navbar -->
+    <header class="navbar glass-panel">
+      <div class="nav-brand">
+        <img src="logo.png" alt="Logo FUCORA" class="nav-logo" onerror="this.style.display='none'" />
+        <div>
+          <span class="nav-title">FUCORA</span>
+          <span class="nav-badge">DetoksLayar</span>
+        </div>
+      </div>
+
+      <div class="nav-user">
+        <div class="user-info">
+          <span id="display-name" class="user-name">Kadet</span>
+          <span id="display-meta" class="user-meta">Kelas • Gmail</span>
+        </div>
+        <button id="demo-guru-btn" class="btn-demo" title="Simulasi angka ekstrem untuk presentasi di depan guru">
+          ⚡ Demo Guru
+        </button>
+        <button id="logout-btn" class="btn-ghost">Keluar</button>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- Grid 2 Kolom: Kalkulator & Hasil Mengejutkan -->
+      <div class="main-grid">
+        <!-- Kolom Kiri: Input Screen Time -->
+        <div class="card glass-panel">
+          <div class="card-header">
+            <h2>🛰️ Radar Waktu Layar Harian</h2>
+            <p>Geser indikator sesuai kebiasaan penggunaan gawai di luar jam pelajaran.</p>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>📱 Media Sosial (TikTok, IG, Reels, Shorts)</span>
+              <strong id="val-sosmed">4.0 jam</strong>
+            </div>
+            <input type="range" id="input-sosmed" min="0" max="12" step="0.5" value="4" />
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>🎮 Game & Hiburan Streaming</span>
+              <strong id="val-game">2.0 jam</strong>
+            </div>
+            <input type="range" id="input-game" min="0" max="10" step="0.5" value="2" />
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>💬 Chatting & Cek Notifikasi (FOMO)</span>
+              <strong id="val-chat">1.5 jam</strong>
+            </div>
+            <input type="range" id="input-chat" min="0" max="8" step="0.5" value="1.5" />
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label">
+              <span>🎂 Usia Kamu Saat Ini</span>
+              <strong id="val-age">16 tahun</strong>
+            </div>
+            <input type="range" id="input-age" min="12" max="22" step="1" value="16" />
+          </div>
+
+          <div class="total-bar">
+            <span>Total Screen Time Harian:</span>
+            <span id="total-daily-hours" class="highlight-cyan">7.5 Jam / Hari</span>
+          </div>
+        </div>
+
+        <!-- Kolom Kanan: Hasil Angka Mengejutkan -->
+        <div class="card glass-panel shock-card">
+          <div class="card-header">
+            <h2>⚠️ Analisis Dampak Kosmik</h2>
+            <span id="status-badge" class="badge-danger">WASPADA DOOMSCROLLING</span>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-label">Waktu Terbuang / Tahun</span>
+              <div class="stat-number" id="res-days-year">114</div>
+              <span class="stat-unit">Hari Penuh (24 Jam)</span>
+            </div>
+
+            <div class="stat-box warning-box">
+              <span class="stat-label">Hidup Hilang (S/D Usia 60 Thn)</span>
+              <div class="stat-number text-danger" id="res-years-lost">13.8</div>
+              <span class="stat-unit">Tahun Masa Hidup</span>
+            </div>
+
+            <div class="stat-box">
+              <span class="stat-label">Setara Buku Pelajaran Selesai</span>
+              <div class="stat-number text-purple" id="res-books">547</div>
+              <span class="stat-unit">Buku / Tahun</span>
+            </div>
+
+            <div class="stat-box">
+              <span class="stat-label">Tingkat Fokus Belajar</span>
+              <div class="stat-number text-cyan" id="res-focus-score">42%</div>
+              <span class="stat-unit">Kapasitas Konsentrasi</span>
+            </div>
+          </div>
+
+          <div class="shock-message" id="shock-message">
+            Dalam 1 tahun, kamu menghabiskan <strong>114 hari non-stop</strong> menatap layar—setara hampir 4 bulan penuh tanpa tidur!
+          </div>
+
+          <!-- Tombol Kirim Laporan ke Gmail -->
+          <button id="send-gmail-btn" class="btn-gmail">
+            ✉️ Kirim Hasil & Laporan Login ke delylaafhendik@gmail.com
+          </button>
+        </div>
+      </div>
+
+      <!-- Bagian Bawah: Rekomendasi Jadwal Belajar Otomatis & Pomodoro -->
+      <div class="bottom-grid">
+        <div class="card glass-panel">
+          <div class="card-header">
+            <h2>📅 Orbit Jadwal Belajar Otomatis</h2>
+            <p>Disusun otomatis berdasarkan tingkat kecanduan gawaimu saat ini.</p>
+          </div>
+          <div id="schedule-list" class="schedule-list">
+            <!-- Diisi otomatis oleh JS -->
+          </div>
+        </div>
+
+        <div class="card glass-panel timer-card">
+          <div class="card-header">
+            <h2>⏱️ Kapsul Fokus Pomodoro</h2>
+            <p>Latih kembali otakmu fokus belajar tanpa menyentuh HP.</p>
+          </div>
+          <div class="timer-display" id="timer-display">25:00</div>
+          <p class="timer-status" id="timer-status">Siap Meluncur ke Sesi Fokus</p>
+          <div class="timer-controls">
+            <button id="start-timer" class="btn-primary">Mulai Fokus</button>
+            <button id="reset-timer" class="btn-ghost">Reset</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
